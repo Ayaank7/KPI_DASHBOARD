@@ -6,8 +6,8 @@ import { SparklineChart } from '../charts/SparklineChart';
 
 function trendClass(isFavorable) {
   return isFavorable 
-    ? 'text-emerald-300 bg-emerald-500/10 border-emerald-400/20' 
-    : 'text-rose-300 bg-rose-500/10 border-rose-400/20';
+    ? 'text-emerald-700 bg-emerald-100 border-emerald-200 dark:text-emerald-300 dark:bg-emerald-500/10 dark:border-emerald-400/20' 
+    : 'text-rose-700 bg-rose-100 border-rose-200 dark:text-rose-300 dark:bg-rose-500/10 dark:border-rose-400/20';
 }
 
 export const KpiCard = memo(function KpiCard({ metric }) {
@@ -40,7 +40,7 @@ export const KpiCard = memo(function KpiCard({ metric }) {
           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
             <Badge tone={metric.alertBreached ? 'high' : 'success'}>{metric.benchmarkLabel}</Badge>
             {metric.alertBreached && (
-              <span className="inline-flex items-center gap-1 rounded-full border border-rose-400/20 bg-rose-500/10 px-2.5 py-1 text-rose-100">
+              <span className="inline-flex items-center gap-1 rounded-full border border-rose-200 bg-rose-100 px-2.5 py-1 text-rose-800 dark:border-rose-400/20 dark:bg-rose-500/10 dark:text-rose-300">
                 <AlertTriangleIcon className="h-3.5 w-3.5" />
                 Threshold breached
               </span>

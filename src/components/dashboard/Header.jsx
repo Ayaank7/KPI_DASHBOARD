@@ -35,7 +35,7 @@ export function Header({
             </Button>
 
             <div>
-              <p className="text-xs uppercase tracking-[0.28em] text-cyan-200/70">Food & Hospitality KPI Intelligence</p>
+              <p className="text-xs uppercase tracking-[0.28em] text-cyan-700 dark:text-cyan-200/70">Food & Hospitality KPI Intelligence</p>
               <h1 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-3xl">{title}</h1>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">{subtitle}</p>
             </div>

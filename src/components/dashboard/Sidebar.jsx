@@ -43,7 +43,7 @@ export function Sidebar({ domains, selectedDomain, onSelect, open, onClose }) {
             </Button>
           </div>
 
-          <Card className="p-4">
+          <Card className="p-4 bg-slate-50 border-slate-200 dark:bg-white/5 dark:border-white/10">
             <Badge tone="success" className="mb-3">Live operational view</Badge>
             <p className="text-sm leading-6 text-slate-700 dark:text-slate-300">
               Monitor the health of revenue, service, labor, customer experience, and ROI in one operating cockpit.
@@ -62,24 +62,32 @@ export function Sidebar({ domains, selectedDomain, onSelect, open, onClose }) {
                   onClick={() => onSelect(domain)}
                   className={`group flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left transition ${
                     active
-                      ? 'border-cyan-400/40 bg-cyan-400/15 text-slate-900 shadow-lg shadow-cyan-500/10 dark:text-white'
-                      : 'border-slate-300/80 bg-white/90 text-slate-700 hover:border-slate-400 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-white/15 dark:hover:bg-white/8'
+                      ? 'border-cyan-300 bg-cyan-50 text-cyan-950 shadow-sm dark:border-cyan-500/30 dark:bg-cyan-500/10 dark:text-white dark:shadow-cyan-500/10'
+                      : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-white/15 dark:hover:bg-white/8'
                   }`}
                 >
                   <span>
                     <span className="block text-sm font-semibold">{domain}</span>
-                    <span className="mt-1 block text-xs leading-5 text-slate-500 group-hover:text-slate-700 dark:text-slate-400 dark:group-hover:text-slate-300">
+                    <span className={`mt-1 block text-xs leading-5 transition ${
+                      active 
+                        ? 'text-cyan-700 dark:text-cyan-100/70' 
+                        : 'text-slate-500 group-hover:text-slate-700 dark:text-slate-400 dark:group-hover:text-slate-300'
+                    }`}>
                       {meta.note}
                     </span>
                   </span>
-                  <ChevronRightIcon className={`h-4 w-4 transition ${active ? 'text-cyan-300' : 'text-slate-500'}`} />
+                  <ChevronRightIcon className={`h-4 w-4 transition ${
+                    active 
+                      ? 'text-cyan-600 dark:text-cyan-300' 
+                      : 'text-slate-400 dark:text-slate-500'
+                  }`} />
                 </button>
               );
             })}
           </nav>
 
-          <div className="mt-auto rounded-3xl border border-slate-300/70 bg-gradient-to-br from-cyan-500/20 to-white p-4 dark:border-white/10 dark:from-cyan-500/15 dark:to-slate-900">
-            <p className="text-xs uppercase tracking-[0.28em] text-cyan-700/90 dark:text-cyan-200/80">Daily focus</p>
+          <div className="mt-auto rounded-3xl border border-slate-200 bg-gradient-to-br from-cyan-100/50 to-slate-50 p-4 dark:border-white/10 dark:from-cyan-500/15 dark:to-slate-900">
+            <p className="text-xs uppercase tracking-[0.28em] text-cyan-800 dark:text-cyan-200/80">Daily focus</p>
             <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-200">
               Sharpest insight today: look at lunch and dinner coverage where revenue spikes are most sensitive to staffing.
             </p>

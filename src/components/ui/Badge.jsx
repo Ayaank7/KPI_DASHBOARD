@@ -1,11 +1,17 @@
-const tones = {
-  low: 'border-sky-400/20 bg-sky-500/10 text-sky-200',
-  medium: 'border-amber-400/20 bg-amber-500/10 text-amber-100',
-  high: 'border-rose-400/20 bg-rose-500/10 text-rose-100',
-  success: 'border-emerald-400/20 bg-emerald-500/10 text-emerald-100',
-  neutral: 'border-slate-300/80 bg-white/90 text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200',
-};
+export function Badge({ children, tone = 'default', className = '' }) {
+  const baseStyles = 'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors';
 
-export function Badge({ tone = 'neutral', className = '', children }) {
-  return <span className={`inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium ${tones[tone] ?? tones.neutral} ${className}`}>{children}</span>;
+  const toneStyles = {
+    default: 'border-slate-200 bg-slate-100 text-slate-800 dark:border-white/10 dark:bg-white/5 dark:text-slate-300',
+    success: 'border-emerald-200 bg-emerald-100 text-emerald-800 dark:border-emerald-400/20 dark:bg-emerald-500/10 dark:text-emerald-300',
+    high: 'border-rose-200 bg-rose-100 text-rose-800 dark:border-rose-400/20 dark:bg-rose-500/10 dark:text-rose-300',
+  };
+
+  const selectedTone = toneStyles[tone] || toneStyles.default;
+
+  return (
+    <div className={`${baseStyles} ${selectedTone} ${className}`}>
+      {children}
+    </div>
+  );
 }
