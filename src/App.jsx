@@ -68,7 +68,7 @@ export default function App() {
     setMobileNavOpen(false);
   };
 
-  const insights = [
+const insights = useMemo(() => [
     {
       label: 'Revenue focus',
       value: viewModel.headlineMetrics.revenue.formattedValue,
@@ -89,7 +89,7 @@ export default function App() {
       value: viewModel.headlineMetrics.roi.formattedValue,
       note: 'Marketing efficiency and payback',
     },
-  ];
+  ], [viewModel]);
 
   return (
     <div className="relative min-h-screen lg:pl-[290px]">

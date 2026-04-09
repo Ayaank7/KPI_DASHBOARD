@@ -24,7 +24,7 @@ export function DonutChart({ data }) {
       </CardHeader>
       <CardBody className="pt-4">
         <div className="relative h-80 w-full">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="99%" height="100%">
             <PieChart>
               <Tooltip contentStyle={tooltipStyle} formatter={(value, name, entry) => [`${Math.round((value / total) * 100)}%`, entry.payload.name]} />
               <Pie data={data} innerRadius={68} outerRadius={110} paddingAngle={3} dataKey="value" stroke="rgba(15, 23, 42, 0.8)">

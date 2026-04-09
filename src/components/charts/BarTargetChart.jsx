@@ -20,7 +20,7 @@ export function BarTargetChart({ data }) {
       </CardHeader>
       <CardBody className="pt-4">
         <div className="h-80 w-full">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="99%" height="100%">
             <BarChart data={data} margin={{ top: 10, right: 8, left: -18, bottom: 0 }}>
               <CartesianGrid stroke="rgba(148, 163, 184, 0.13)" strokeDasharray="4 4" vertical={false} />
               <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} minTickGap={20} />

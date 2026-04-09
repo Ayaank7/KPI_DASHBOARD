@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { Card, CardBody, CardDescription, CardHeader, CardTitle } from '../ui/Card';
 
 const dayOrder = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -12,8 +12,21 @@ function heatColor(value, max) {
   return 'bg-slate-800/80';
 }
 
-export function HeatmapChart({ data }) {
-  const maxValue = Math.max(...data.map((item) => item.value));
+// MODIFIED: Wrapped in memo to prevent unnecessary re-renders
+export const HeatmapChart = memo(function HeatmapChart({ data }) {
+  
+  // MODIFIED: Wrapped heavy calculations in useMemo
+  const { maxValue, gridData } = useMemo(() => {
+    const max = Math.max(...data.map((item) => item.value));
+    
+    // Pre-calculate the days so we don't run 7 array filters on every render cycle
+    const grouped = dayOrder.map(day => ({
+      day,
+      cells: data.filter(cell => cell.day === day)
+    }));
+
+    return { maxValue: max, gridData: grouped };
+  }, [data]);
 
   return (
     <Card className="overflow-hidden">
@@ -35,18 +48,14 @@ export function HeatmapChart({ data }) {
           </div>
 
           <div className="space-y-1">
-            {dayOrder.map((day) => {
-              const dayCells = data.filter((cell) => cell.day === day);
-
-              return (
-                <div key={day} className="grid grid-cols-[56px_repeat(24,minmax(0,1fr))] gap-1">
-                  <div className="flex h-8 items-center justify-start text-xs font-medium text-slate-400">{day}</div>
-                  {dayCells.map((cell) => (
-                    <div key={`${cell.day}-${cell.hour}`} title={`${cell.day} ${cell.hour} · ${cell.value}`} className={`h-8 rounded-lg border border-white/5 ${heatColor(cell.value, maxValue)} transition hover:-translate-y-0.5 hover:border-cyan-300/50 hover:shadow-lg`} />
-                  ))}
-                </div>
-              );
-            })}
+            {gridData.map(({ day, cells }) => (
+              <div key={day} className="grid grid-cols-[56px_repeat(24,minmax(0,1fr))] gap-1">
+                <div className="flex h-8 items-center justify-start text-xs font-medium text-slate-400">{day}</div>
+                {cells.map((cell) => (
+                  <div key={`${cell.day}-${cell.hour}`} title={`${cell.day} ${cell.hour} · ${cell.value}`} className={`h-8 rounded-lg border border-white/5 ${heatColor(cell.value, maxValue)} transition hover:-translate-y-0.5 hover:border-cyan-300/50 hover:shadow-lg`} />
+                ))}
+              </div>
+            ))}
           </div>
 
           <div className="flex items-center justify-between gap-4 text-xs text-slate-400">
@@ -60,4 +69,4 @@ export function HeatmapChart({ data }) {
       </CardBody>
     </Card>
   );
-}
+});

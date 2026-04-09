@@ -4,12 +4,16 @@ import { Card, CardBody, CardDescription, CardHeader, CardTitle } from '../ui/Ca
 import { AlertTriangleIcon, ArrowDownIcon, ArrowUpIcon, SparkIcon } from '../ui/Icons';
 import { SparklineChart } from '../charts/SparklineChart';
 
-function trendClass(direction) {
-  return direction === 'up' ? 'text-emerald-300 bg-emerald-500/10 border-emerald-400/20' : 'text-rose-300 bg-rose-500/10 border-rose-400/20';
+function trendClass(isFavorable) {
+  return isFavorable 
+    ? 'text-emerald-300 bg-emerald-500/10 border-emerald-400/20' 
+    : 'text-rose-300 bg-rose-500/10 border-rose-400/20';
 }
 
-export function KpiCard({ metric }) {
+export const KpiCard = memo(function KpiCard({ metric }) {
   const sparklineData = metric.sparkline.map((value, index) => ({ value, index }));
+  
+  const isFavorable = metric.trendDirection === metric.direction;
 
   return (
     <Card className="overflow-hidden">
@@ -22,7 +26,7 @@ export function KpiCard({ metric }) {
           <CardDescription>{metric.domain}</CardDescription>
         </div>
 
-        <Badge tone={metric.alertBreached ? 'high' : 'success'} className={trendClass(metric.trendDirection)}>
+        <Badge tone={metric.alertBreached ? 'high' : 'success'} className={trendClass(isFavorable)}>
           <span className="inline-flex items-center gap-1.5">
             {metric.trendDirection === 'up' ? <ArrowUpIcon className="h-3.5 w-3.5" /> : <ArrowDownIcon className="h-3.5 w-3.5" />}
             {metric.trendLabel}
@@ -35,12 +39,12 @@ export function KpiCard({ metric }) {
           <p className="text-3xl font-semibold tracking-tight text-slate-50">{metric.formattedValue}</p>
           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
             <Badge tone={metric.alertBreached ? 'high' : 'success'}>{metric.benchmarkLabel}</Badge>
-            {metric.alertBreached ? (
+            {metric.alertBreached && (
               <span className="inline-flex items-center gap-1 rounded-full border border-rose-400/20 bg-rose-500/10 px-2.5 py-1 text-rose-100">
                 <AlertTriangleIcon className="h-3.5 w-3.5" />
                 Threshold breached
               </span>
-            ) : null}
+            )}
           </div>
         </div>
 
@@ -50,4 +54,4 @@ export function KpiCard({ metric }) {
       </CardBody>
     </Card>
   );
-}
+});

@@ -28,7 +28,7 @@ export const RevenueLineChart = memo(function RevenueLineChart({ data }) {
       </CardHeader>
       <CardBody className="pt-4">
         <div className="h-80 w-full">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="99%" height="100%">
             <LineChart data={data} margin={{ top: 10, right: 8, left: -18, bottom: 0 }}>
               <defs>
                 <linearGradient id="revenueLine" x1="0" y1="0" x2="0" y2="1">
@@ -42,14 +42,20 @@ export const RevenueLineChart = memo(function RevenueLineChart({ data }) {
               </defs>
               <CartesianGrid stroke="rgba(148, 163, 184, 0.13)" strokeDasharray="4 4" vertical={false} />
               <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} minTickGap={18} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} width={72} tickFormatter={(value) => `$${Math.round(value / 1000)}k`} />
+              
+              {/* MODIFIED: Fixed hardcoded $ to ₹ */}
+              <YAxis tickLine={false} axisLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} width={72} tickFormatter={(value) => `₹${Math.round(value / 1000)}k`} />
+              
               <Tooltip
                 contentStyle={tooltipStyle}
                 labelStyle={{ color: '#e2e8f0' }}
-                formatter={(value, name) => [new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(value), name === 'revenue' ? 'Revenue' : 'Target']}
+                // MODIFIED: Changed en-US to en-IN for Indian comma formatting
+                formatter={(value, name) => [new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(value), name === 'revenue' ? 'Revenue' : 'Target']}
               />
-              <Line type="monotone" dataKey="revenue" stroke="url(#revenueLine)" strokeWidth={3.2} dot={false} activeDot={{ r: 5 }} />
-              <Line type="monotone" dataKey="target" stroke="url(#targetLine)" strokeWidth={2.2} strokeDasharray="6 6" dot={false} />
+              
+              {/* MODIFIED: Added isAnimationActive={false} to prevent animation lag on live updates */}
+              <Line type="monotone" dataKey="revenue" stroke="url(#revenueLine)" strokeWidth={3.2} dot={false} activeDot={{ r: 5 }} isAnimationActive={false} />
+              <Line type="monotone" dataKey="target" stroke="url(#targetLine)" strokeWidth={2.2} strokeDasharray="6 6" dot={false} isAnimationActive={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>

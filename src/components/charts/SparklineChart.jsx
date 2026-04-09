@@ -3,7 +3,7 @@ import { Line, LineChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 export const SparklineChart = memo(function SparklineChart({ data, stroke = '#22d3ee' }) {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="99%" height="100%">
       <LineChart data={data}>
         <Tooltip
           cursor={false}
