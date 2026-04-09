@@ -19,7 +19,7 @@ export const KpiCard = memo(function KpiCard({ metric }) {
     <Card className="overflow-hidden">
       <CardHeader>
         <div className="min-w-0">
-          <CardTitle className="flex items-center gap-2 text-sm font-medium text-slate-300">
+          <CardTitle className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300">
             <SparkIcon className="h-4 w-4 text-cyan-300" />
             {metric.label}
           </CardTitle>
@@ -36,7 +36,7 @@ export const KpiCard = memo(function KpiCard({ metric }) {
 
       <CardBody className="grid gap-4 pt-4 sm:grid-cols-[minmax(0,1fr)_120px] sm:items-end">
         <div>
-          <p className="text-3xl font-semibold tracking-tight text-slate-50">{metric.formattedValue}</p>
+          <p className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">{metric.formattedValue}</p>
           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
             <Badge tone={metric.alertBreached ? 'high' : 'success'}>{metric.benchmarkLabel}</Badge>
             {metric.alertBreached && (
@@ -48,7 +48,7 @@ export const KpiCard = memo(function KpiCard({ metric }) {
           </div>
         </div>
 
-        <div className="h-14 rounded-2xl border border-white/5 bg-white/5 p-2">
+        <div className="h-14 rounded-2xl border border-slate-200 bg-slate-50 p-2 dark:border-white/5 dark:bg-white/5">
           <SparklineChart data={sparklineData} />
         </div>
       </CardBody>

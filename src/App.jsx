@@ -135,10 +135,10 @@ const insights = useMemo(() => [
               <CardBody className="pt-4">
                 <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                   {insights.map((item) => (
-                    <div key={item.label} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <div key={item.label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/5">
                       <p className="text-xs uppercase tracking-[0.24em] text-slate-500">{item.label}</p>
-                      <p className="mt-3 text-2xl font-semibold text-white">{item.value}</p>
-                      <p className="mt-2 text-sm leading-6 text-slate-400">{item.note}</p>
+                      <p className="mt-3 text-2xl font-semibold text-slate-900 dark:text-white">{item.value}</p>
+                      <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">{item.note}</p>
                     </div>
                   ))}
                 </div>
@@ -155,8 +155,8 @@ const insights = useMemo(() => [
               <CardBody className="space-y-4 pt-4">
                 <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-cyan-500/10 to-transparent p-4">
                   <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/70">Role</p>
-                  <p className="mt-2 text-lg font-semibold text-white">{role}</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
+                  <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">{role}</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
                     {role === 'Owner'
                       ? 'Owner mode emphasizes margin, ROI, and forecast confidence.'
                       : 'Manager mode emphasizes throughput, staffing, and guest experience.'}
@@ -164,13 +164,13 @@ const insights = useMemo(() => [
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/5">
                     <p className="text-xs uppercase tracking-[0.22em] text-slate-500">Window</p>
-                    <p className="mt-2 font-medium text-slate-100">{viewModel.timeFilter}</p>
+                    <p className="mt-2 font-medium text-slate-900 dark:text-slate-100">{viewModel.timeFilter}</p>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/5">
                     <p className="text-xs uppercase tracking-[0.22em] text-slate-500">Alerts</p>
-                    <p className="mt-2 font-medium text-slate-100">{viewModel.alerts.length} active</p>
+                   <p className="mt-2 font-medium text-slate-900 dark:text-slate-100">{viewModel.alerts.length} active</p>
                   </div>
                 </div>
 
